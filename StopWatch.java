@@ -32,13 +32,21 @@ public final class StopWatch extends JFrame implements Runnable {
             }
 
         }));
-        panel.add(new JButton(new AbstractAction("STOP") {
-
-            public void actionPerformed(ActionEvent e) {
-                running = false;
+        if(running == true ){
+            panel.add(new JButton(new AbstractAction("STOP") {
+    
+                public void actionPerformed(ActionEvent e) {
+                    running = false;
+                }
+    
+            }));
+            }else if(running == false){
+                panel.add(new JButton(new AbstractAction("RESET"){
+                    public void actionPerformed(ActionEvent e){
+                        running = true;
+                    }
+                }));
             }
-
-        }));
         panel.add(new JButton(new AbstractAction("RAP") {
             
             public void actionPerformed(ActionEvent e){
