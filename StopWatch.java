@@ -13,6 +13,7 @@ public final class StopWatch extends JFrame implements Runnable {
 
     boolean running;
     long startTime;
+    long restartTime;
 
     private final JTextField tView;
 
@@ -32,21 +33,22 @@ public final class StopWatch extends JFrame implements Runnable {
             }
 
         }));
-        if(running == true ){
-            panel.add(new JButton(new AbstractAction("STOP") {
-    
-                public void actionPerformed(ActionEvent e) {
+        panel.add(new JButton(new AbstractAction("STOP") {
+            
+            public void actionPerformed(ActionEvent e) {
+                if (running == true){
                     running = false;
+                    restartTime = System.currentTimeMillis() - startTime;
+                }else{
+                    running = true;
+                    startTime = System.currentTimeMillis() - restartTime;
+                    Thread thread = new Thread(StopWatch.this);
+                    thread.start();
                 }
-    
-            }));
-            }else if(running == false){
-                panel.add(new JButton(new AbstractAction("RESET"){
-                    public void actionPerformed(ActionEvent e){
-                        running = true;
-                    }
-                }));
+                
             }
+
+        }));
         panel.add(new JButton(new AbstractAction("RAP") {
             
             public void actionPerformed(ActionEvent e){
