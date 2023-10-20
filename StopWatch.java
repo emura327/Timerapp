@@ -52,13 +52,23 @@ public final class StopWatch extends JFrame implements Runnable {
         panel.add(new JButton(new AbstractAction("RAP") {
             
             public void actionPerformed(ActionEvent e){
-                Calendar b = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
-                b.setTimeInMillis(System.currentTimeMillis() - startTime);
-                System.out.println(String.format("%2d:%02d:%02d:%03d",
-                                        b.get(HOUR_OF_DAY),
-                                        b.get(MINUTE),
-                                        b.get(SECOND),
-                                        b.get(MILLISECOND)));
+                if(running == false){
+                    Calendar b = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+                    b.setTimeInMillis(System.currentTimeMillis() - (System.currentTimeMillis() - restartTime));
+                    System.out.println(String.format("%2d:%02d:%02d:%03d",
+                                            b.get(HOUR_OF_DAY),
+                                            b.get(MINUTE),
+                                            b.get(SECOND),
+                                            b.get(MILLISECOND)));
+                }else{
+                    Calendar b = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+                    b.setTimeInMillis(System.currentTimeMillis() - startTime);
+                    System.out.println(String.format("%2d:%02d:%02d:%03d",
+                                            b.get(HOUR_OF_DAY),
+                                            b.get(MINUTE),
+                                            b.get(SECOND),
+                                            b.get(MILLISECOND)));
+                }
             }
         }));
         setLayout(new BorderLayout());
